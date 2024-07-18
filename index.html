@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!--
+          created by kavya trivedi
+        -->
+        <h1>LINK TO QR </h1>
+        <input type="text" id="linkInput" placeholder="Enter link here">
+        <button onclick="generateQRCode()">Generate QR Code</button>
+        <div id="qrcode"></div>
+        <a id="downloadLink" style="display: none;" download="qrcode.png">Download QR Code</a>
+    </div>
+<!--
+          created by kavya trivedi ig=kavyatrivedi.og
+        -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+<!--
+          created by kavya trivedi
+        -->
+    
+
+    <script>
+        function generateQRCode() {
+            let link = document.getElementById("linkInput").value;
+            if (!link) {
+                alert("Please enter a link");
+                return;
+            }
+
+            let qrcodeContainer = document.getElementById("qrcode");
+            qrcodeContainer.innerHTML = "";
+
+            let qrcode = new QRCode(qrcodeContainer, {
+                text: link,
+                width: 128,
+                height: 128
+            });
+
+            setTimeout(() => {
+                let qrCanvas = qrcodeContainer.getElementsByTagName("canvas")[0];
+                let dataURL = qrCanvas.toDataURL("image/png");
+                let downloadLink = document.getElementById("downloadLink");
+                downloadLink.href = dataURL;
+                downloadLink.style.display = "inline-block";
+            }, 300);
+        }
+    </script>
+    <!--
+          created by kavya trivedi
+        -->
+</body>
+</html>
